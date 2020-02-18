@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "rounting-demo": {
@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "rounting-demo"
+    }
+  },
+  "defaultProject": "rounting-demo",
+  "cli": {
+    "analytics": "2dd078e4-f19a-47c6-821d-5366beec31cc"
+  }
 }
