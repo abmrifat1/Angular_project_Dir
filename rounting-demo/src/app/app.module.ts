@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { DepartmentDetailsComponent } from './department-details/department-details.component';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AppComponent,
     routingComponents,
     PageNotFoundComponent,
+    DepartmentDetailsComponent,
   ],
   imports: [
     BrowserModule,
