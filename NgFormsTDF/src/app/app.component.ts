@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'NgFormsTDF';
+  topics = ['Angular','Node','React']
 }
