@@ -3,23 +3,56 @@
     <div class="col-md-6 offset-md-3">
       <h1>Form</h1>
       <hr />
-      <form action="">
+      <form action="" #userForm="ngForm">
+        {{ userForm.value | json }}
+
+        <!-- <div ngModelGroup="address">
+          <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Street</label>
+              <input type="text" name="street" ngModel class="form-control" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">City</label>
+              <input type="text" name="city" ngModel class="form-control" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+          <div class="form-group">
+            <label for="">State</label>
+            <input type="text" name="state" ngModel class="form-control" />
+          </div>
+          </div>
+          <div class="col-md-6">
+          <div class="form-group">
+            <label for="">Postal Code</label>
+            <input type="text" name="postalCode" ngModel class="form-control" />
+          </div>
+          </div>
+          </div>
+        </div> -->
+
         <div class="form-group">
           <label for="">Name</label>
-          <input type="text" class="form-control" />
+          <input type="text" name="userName" ngModel class="form-control" />
         </div>
         <div class="form-group">
           <label for="">Email</label>
-          <input type="email" class="form-control" />
+          <input type="email" name="mail" ngModel class="form-control" />
         </div>
         <div class="form-group">
           <label for="">Phone</label>
-          <input type="tel" class="form-control" />
+          <input type="tel" name="phone" ngModel class="form-control" />
         </div>
 
         <div class="form-group">
           <label for="">I am interested in</label>
-          <select class="custom-select">
+          <select class="custom-select" name="topic" ngModel>
             <option *ngFor="let topic of topics">{{ topic }}</option>
           </select>
         </div>
@@ -30,6 +63,7 @@
             <input
               type="radio"
               name="timePreference"
+              ngModel
               value="morning"
               class="form-check-input"
             />
@@ -41,6 +75,7 @@
               type="radio"
               name="timePreference"
               value="evening"
+              ngModel
               class="form-check-input"
             />
             <label class="form-check-label">Evening (5 pm - 8 pm)</label>
@@ -50,6 +85,8 @@
         <div class="form-check mb-3">
           <input
             type="checkbox"
+            name="subscribe"
+            ngModel
             class="form-check-input"
           />
           <label class="form-check-label">Send me promotional offer</label>
