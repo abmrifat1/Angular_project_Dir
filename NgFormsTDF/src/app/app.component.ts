@@ -10,5 +10,5 @@ export class AppComponent {
   title = 'NgFormsTDF';
   topics = ['Angular','Node','React']
 
-  userModel= new User('','smith@test.com',90075556,'','morning',true);
+  userModel= new User('','smith@test.com',90075556,'default','morning',true);
 }

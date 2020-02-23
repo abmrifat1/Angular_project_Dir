@@ -45,11 +45,20 @@
             type="text"
             required
             #name="ngModel"
+            pattern="[a-zA-Z ]*"
             [class.is-invalid]="name.invalid && name.touched"
             name="userName"
             [(ngModel)]="userModel.name"
             class="form-control"
           />
+
+          <div *ngIf="name.errors && (name.invalid && name.touched)">
+    
+          <small class="text-danger" *ngIf="name.errors.pattern">Name must be letter</small> 
+                <small class="text-danger" *ngIf="name.errors.required">Name is required.</small> 
+        </div>
+       
+          <!-- <small class="text-danger" [class.d-none]="name.valid || name.untouched">Name is required and must be letter</small> -->
         </div>
         <!-- {{ name.className }} -->
 
@@ -60,31 +69,53 @@
             required
             #mail="ngModel"
             name="mail"
+            pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
+            [class.is-invalid]="mail.invalid && mail.touched"
             [(ngModel)]="userModel.email"
             class="form-control"
           />
+          <div *ngIf="mail.errors && (mail.invalid && mail.touched)">
+    
+            <small class="text-danger" *ngIf="mail.errors.pattern">Mail is not valid</small> 
+                  <small class="text-danger" *ngIf="mail.errors.required">Mail is required.</small> 
+          </div>
+        
         </div>
-        {{ mail.valid }}
+        <!-- {{ mail.valid }} -->
 
         <div class="form-group">
           <label for="">Phone</label>
           <input
             type="tel"
             name="phone"
+            required
+            #phone="ngModel"
+            pattern="^\d{11}$"
+            [class.is-invalid]="phone.invalid && phone.touched"
             [(ngModel)]="userModel.phone"
             class="form-control"
           />
+
+          <div *ngIf="phone.errors && (phone.invalid && phone.touched)">
+            <small class="text-danger" *ngIf="phone.errors.required">Phone number is required</small>
+            <small class="text-danger" *ngIf="phone.errors.pattern">Phone number must ne 11 digit</small>
+          </div>
+          <!-- <small class="text-danger" [class.d-none]="phone.valid || phone.untouched">Phone number is required and must be 11 digit</small> -->
         </div>
 
         <div class="form-group">
           <select
             class="custom-select"
             name="topic"
+            required
+            #topic="ngModel"
+            [class.is-invalid]="topic.invalid && topic.touched"
             [(ngModel)]="userModel.topic"
           >
-            <option value="">I am interested in</option>
+            <option value="default">I am interested in</option>
             <option *ngFor="let topic of topics">{{ topic }}</option>
           </select>
+          <small class="text-danger" [class.d-none]="topic.valid || topic.untouched">Choose one topic</small>
         </div>
 
         <div class="mb-3">
