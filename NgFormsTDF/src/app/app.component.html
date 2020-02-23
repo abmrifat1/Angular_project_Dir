@@ -37,22 +37,26 @@
           </div>
         </div> -->
 
+        <hr/>
+{{userModel | json}}
+
         <div class="form-group">
           <label for="">Name</label>
-          <input type="text" name="userName" ngModel class="form-control" />
+          <input type="text" name="userName" [ngModel]="userModel.name" class="form-control" />
         </div>
         <div class="form-group">
           <label for="">Email</label>
-          <input type="email" name="mail" ngModel class="form-control" />
+          <input type="email" name="mail" [ngModel]="userModel.email" class="form-control" />
         </div>
         <div class="form-group">
           <label for="">Phone</label>
-          <input type="tel" name="phone" ngModel class="form-control" />
+          <input type="tel" name="phone" [ngModel]="userModel.phone" class="form-control" />
         </div>
 
         <div class="form-group">
-          <label for="">I am interested in</label>
-          <select class="custom-select" name="topic" ngModel>
+         
+          <select class="custom-select" name="topic" [ngModel]="userModel.topic">
+            <option value="">I am interested in</option>
             <option *ngFor="let topic of topics">{{ topic }}</option>
           </select>
         </div>
@@ -63,7 +67,7 @@
             <input
               type="radio"
               name="timePreference"
-              ngModel
+              [ngModel]="userModel.timePreference"
               value="morning"
               class="form-check-input"
             />
@@ -75,7 +79,7 @@
               type="radio"
               name="timePreference"
               value="evening"
-              ngModel
+              [ngModel]="userModel.timePreference"
               class="form-check-input"
             />
             <label class="form-check-label">Evening (5 pm - 8 pm)</label>
@@ -86,7 +90,7 @@
           <input
             type="checkbox"
             name="subscribe"
-            ngModel
+            [ngModel]="userModel.subscribe"
             class="form-check-input"
           />
           <label class="form-check-label">Send me promotional offer</label>
