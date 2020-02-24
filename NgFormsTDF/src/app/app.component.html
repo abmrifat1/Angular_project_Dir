@@ -107,15 +107,17 @@
           <select
             class="custom-select"
             name="topic"
-            required
+            (blur)="validateTopic(topic.value)"
+            (change)="validateTopic(topic.value)"
+            
             #topic="ngModel"
-            [class.is-invalid]="topic.invalid && topic.touched"
+            [class.is-invalid]="topicHasError && topic.touched"
             [(ngModel)]="userModel.topic"
           >
             <option value="default">I am interested in</option>
             <option *ngFor="let topic of topics">{{ topic }}</option>
           </select>
-          <small class="text-danger" [class.d-none]="topic.valid || topic.untouched">Choose one topic</small>
+          <small class="text-danger" [class.d-none]="!topicHasError || topic.untouched">Choose one topic</small>
         </div>
 
         <div class="mb-3">
@@ -152,7 +154,7 @@
           />
           <label class="form-check-label">Send me promotional offer</label>
         </div>
-        <button type="submit" class="btn btn-primary">Submit form</button>
+        <button [disabled]="userForm.form.invalid" type="submit" class="btn btn-primary">Submit form</button>
       </form>
     </div>
   </div>
