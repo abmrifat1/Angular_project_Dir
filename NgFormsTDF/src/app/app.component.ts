@@ -1,5 +1,7 @@
+import { EnrollmentService } from './enrollment.service';
 import { User } from "./user";
 import { Component } from "@angular/core";
+
 
 @Component({
   selector: "app-root",
@@ -7,6 +9,7 @@ import { Component } from "@angular/core";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
+  constructor(private _enrollmentService:EnrollmentService){};
   title = "NgFormsTDF";
   topics = ["Angular", "Node", "React"];
   topicHasError = true;
@@ -19,7 +22,10 @@ export class AppComponent {
   }
 
   onSubmit() {
-    console.log(this.userModel);
+    this._enrollmentService.enroll(this.userModel).subscribe(
+      data=> console.log('Success!',data),
+      error=> console.log('Error!',error)
+    )
   }
 
   userModel = new User(
