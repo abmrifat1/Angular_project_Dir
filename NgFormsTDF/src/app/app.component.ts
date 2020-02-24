@@ -10,6 +10,8 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
   constructor(private _enrollmentService:EnrollmentService){};
+  submitted=false;
+  errorMsg:'';
   title = "NgFormsTDF";
   topics = ["Angular", "Node", "React"];
   topicHasError = true;
@@ -22,9 +24,10 @@ export class AppComponent {
   }
 
   onSubmit() {
+    this.submitted=true;
     this._enrollmentService.enroll(this.userModel).subscribe(
       data=> console.log('Success!',data),
-      error=> console.log('Error!',error)
+      error=> this.errorMsg=error.statusText
     )
   }
 
