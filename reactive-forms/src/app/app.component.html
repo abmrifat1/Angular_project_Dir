@@ -8,31 +8,36 @@
         <div class="form-group">
           <label for="">Username</label>
           <input
-            [class.is-invalid]="
-              userName.invalid &&
-              userName.touched
-            "
+            [class.is-invalid]="userName.invalid && userName.touched"
             type="text"
             formControlName="userName"
             class="form-control"
           />
-          <div
-            *ngIf="
-              userName.invalid &&
-              userName.touched
-            "
-          >
-            <small
-              *ngIf="userName.errors?.required;"
-              class="text-danger"
+          <div *ngIf="userName.invalid && userName.touched">
+            <small *ngIf="userName.errors?.required" class="text-danger"
               >Username is required</small
             >
-            <small
-            *ngIf="userName.errors?.minlength"
-            class="text-danger"
-            >Username is must be at least 3 characters</small
-          >
+            <small *ngIf="userName.errors?.minlength" class="text-danger"
+              >Username is must be at least 3 characters</small
+            >
+            <small *ngIf="userName.errors?.frobiddenName" class="text-danger"
+              >{{userName.errors?.frobiddenName.value}} Username not allowed</small
+            >
           </div>
+        </div>
+        <div class="form-group">
+          <label for="">Email</label>
+          <input
+          [class.is-invalid]="email.invalid && email.touched"
+            type="email"
+            formControlName="email"
+            class="form-control"
+          />
+          <small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is required</small>
+        </div>
+        <div class="form-check mb-3">
+          <input type="checkbox" class="form-check-input" formControlName="subscribe">
+          <label class="form-check-label">Send me promotional offers</label>
         </div>
         <div class="form-group">
           <label for="">Password</label>
@@ -46,9 +51,11 @@
           <label for="">Confirm Password</label>
           <input
             type="password"
+            [class.is-invalid]="registrationForm.errors?.misMatch"
             formControlName="confirmPassword"
             class="form-control"
           />
+          <small class="text-danger" *ngIf="registrationForm.errors?.misMatch">Passwords do not match</small>
         </div>
         <div class="row" formGroupName="address">
           <div class="col-md-4">
