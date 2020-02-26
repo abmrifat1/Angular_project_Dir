@@ -1,32 +1,46 @@
-import { Component,OnInit } from "@angular/core";
+import { RegistrationService } from "./registration.service";
+import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, FormGroup, FormArray } from "@angular/forms";
-import { forbiddenNameValidator } from './shared/user-name.validator';
-import { passwordValidation } from './shared/password.validator';
+import { forbiddenNameValidator } from "./shared/user-name.validator";
+import { passwordValidation } from "./shared/password.validator";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
-export class AppComponent implements OnInit{
-  constructor(private fb: FormBuilder) {}
+export class AppComponent implements OnInit {
+  constructor(
+    private fb: FormBuilder,
+    private _registrationService: RegistrationService
+  ) {}
   title = "reactive-forms";
-  
+
   registrationForm: FormGroup;
-  get userName(){
-    return this.registrationForm.get('userName');
+  get userName() {
+    return this.registrationForm.get("userName");
   }
-  get email(){
-    return this.registrationForm.get('email');
-  }
-
-  get alternateEmails(){
-    return this.registrationForm.get('alternateEmails') as FormArray;
+  get email() {
+    return this.registrationForm.get("email");
   }
 
-  addAlternateEmail(){
-    this.alternateEmails.push(this.fb.control(''))
+  get alternateEmails() {
+    return this.registrationForm.get("alternateEmails") as FormArray;
   }
+
+  addAlternateEmail() {
+    this.alternateEmails.push(this.fb.control(""));
+  }
+
+  onSubmit() {
+    console.log(this.registrationForm.value);
+    this._registrationService.register(this.registrationForm.value)
+    .subscribe(
+      response => console.log("Success!", response),
+      error => console.log("Error!",error)
+    );
+  }
+
   // registrationForm = new FormGroup({
   //   userName: new FormControl("abm"),
   //   password: new FormControl(""),
@@ -38,42 +52,53 @@ export class AppComponent implements OnInit{
   //   })
   // });
 
-  ngOnInit(){
-  this.registrationForm = this.fb.group({
-    userName: ["",[ Validators.required,Validators.minLength(3),forbiddenNameValidator(/admin/)]],
-    email:[""],
-    subscribe:[false],
-    password: [""],
-    confirmPassword: [""],
-    address: this.fb.group({
-      city: [""],
-      state: [""],
-      postalCode: [""]
-    }),
-    alternateEmails:this.fb.array([])
-  },{validator:passwordValidation});
+  ngOnInit() {
+    this.registrationForm = this.fb.group(
+      {
+        userName: [
+          "",
+          [
+            Validators.required,
+            Validators.minLength(3),
+            forbiddenNameValidator(/admin/)
+          ]
+        ],
+        email: [""],
+        subscribe: [false],
+        password: [""],
+        confirmPassword: [""],
+        address: this.fb.group({
+          city: [""],
+          state: [""],
+          postalCode: [""]
+        }),
+        alternateEmails: this.fb.array([])
+      },
+      { validator: passwordValidation }
+    );
 
-  this.registrationForm.get('subscribe').valueChanges.subscribe(checkedValue =>{
-    const email=this.registrationForm.get('email');
-    if(checkedValue){
-      email.setValidators(Validators.required);
-    }else{
-      email.clearValidators();
-    }
-    email.updateValueAndValidity();
-  })
-}
-
+    this.registrationForm
+      .get("subscribe")
+      .valueChanges.subscribe(checkedValue => {
+        const email = this.registrationForm.get("email");
+        if (checkedValue) {
+          email.setValidators(Validators.required);
+        } else {
+          email.clearValidators();
+        }
+        email.updateValueAndValidity();
+      });
+  }
 
   loadApiData() {
     this.registrationForm.patchValue({
       userName: "khorshed alam",
       password: "123456",
       confirmPassword: "123456",
-      address:{
-        city:'Dhaka',
-        state:"Nodda",
-        postalCode:12345,
+      address: {
+        city: "Dhaka",
+        state: "Nodda",
+        postalCode: 12345
       }
     });
   }
