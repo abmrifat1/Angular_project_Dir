@@ -124,7 +124,35 @@
           Load Api
         </button>
       </form>
+      <h2>{{ data | json }}</h2>
+      <hr />
+      <div>
+        <button class="btn btn-sm btn-success my-5" (click)="getUserList()">
+          Show User List
+        </button>
+        <div class="container-fluid">
+          <h2>Registration Form</h2>
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of userDate">
+                <td scope="row">{{ user.userName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.password }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <h2>{{ "" }}</h2>
+        </div>
+      </div>
+     
     </div>
   </div>
 </div>
-<h2>{{ data | json }}</h2>

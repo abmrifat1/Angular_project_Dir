@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   ) {}
   title = "reactive-forms";
   data = [];
+  userDate:any[] =[];
   registrationForm: FormGroup;
   get userName() {
     return this.registrationForm.get("userName");
@@ -43,6 +44,16 @@ export class AppComponent implements OnInit {
     );
   }
 
+  getUserList(){
+    this._registrationService.getUser().subscribe(
+      result=>{
+        console.log('user list:',result);
+        this.userDate=result.data;
+      },
+      err=> console.log("Error!",err)
+    )
+  }
+
   // registrationForm = new FormGroup({
   //   userName: new FormControl("abm"),
   //   password: new FormControl(""),
@@ -55,6 +66,7 @@ export class AppComponent implements OnInit {
   // });
 
   ngOnInit() {
+   
     this.registrationForm = this.fb.group(
       {
         userName: [

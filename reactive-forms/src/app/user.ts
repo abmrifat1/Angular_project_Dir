@@ -10,3 +10,11 @@ export class User {
     public postalCode: string
   ) {}
 }
+
+export interface Sample {
+  userName: string;
+  email: string;
+  subscribe: boolean;
+  password: string;
+  confirmPassword: string;
+}
