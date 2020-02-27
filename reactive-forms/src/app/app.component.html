@@ -21,26 +21,48 @@
               >Username is must be at least 3 characters</small
             >
             <small *ngIf="userName.errors?.frobiddenName" class="text-danger"
-              >{{userName.errors?.frobiddenName.value}} Username not allowed</small
+              >{{ userName.errors?.frobiddenName.value }} Username not
+              allowed</small
             >
           </div>
         </div>
         <div class="form-group">
           <label for="">Email</label>
-          <button type="button" class="btn btn-secondary btn-sm float-right" (click)="addAlternateEmail()">Add email</button>
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm float-right"
+            (click)="addAlternateEmail()"
+          >
+            Add email
+          </button>
           <input
-          [class.is-invalid]="email.invalid && email.touched"
+            [class.is-invalid]="email.invalid && email.touched"
             type="email"
             formControlName="email"
             class="form-control"
           />
-          <small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is required</small>
-          <div formArrayName="alternateEmails" *ngFor="let email of alternateEmails.controls; let i=index"> 
-            <input type="email" class="form-control my-1" [formControlName]="i">
+          <small
+            class="text-danger"
+            [class.d-none]="email.valid || email.untouched"
+            >Email is required</small
+          >
+          <div
+            formArrayName="alternateEmails"
+            *ngFor="let email of alternateEmails.controls; let i = index"
+          >
+            <input
+              type="email"
+              class="form-control my-1"
+              [formControlName]="i"
+            />
           </div>
         </div>
         <div class="form-check mb-3">
-          <input type="checkbox" class="form-check-input" formControlName="subscribe">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            formControlName="subscribe"
+          />
           <label class="form-check-label">Send me promotional offers</label>
         </div>
         <div class="form-group">
@@ -59,7 +81,9 @@
             formControlName="confirmPassword"
             class="form-control"
           />
-          <small class="text-danger" *ngIf="registrationForm.errors?.misMatch">Passwords do not match</small>
+          <small class="text-danger" *ngIf="registrationForm.errors?.misMatch"
+            >Passwords do not match</small
+          >
         </div>
         <div class="row" formGroupName="address">
           <div class="col-md-4">
@@ -85,7 +109,13 @@
             </div>
           </div>
         </div>
-        <button [disabled]='!registrationForm.valid' class="btn btn-primary" type="submit">Register</button>
+        <button
+          [disabled]="!registrationForm.valid"
+          class="btn btn-primary"
+          type="submit"
+        >
+          Register
+        </button>
         <button
           (click)="loadApiData()"
           class="btn btn-secondary ml-2"
@@ -97,3 +127,4 @@
     </div>
   </div>
 </div>
+<h2>{{ data | json }}</h2>

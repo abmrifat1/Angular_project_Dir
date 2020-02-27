@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, FormGroup, FormArray } from "@angular/forms";
 import { forbiddenNameValidator } from "./shared/user-name.validator";
 import { passwordValidation } from "./shared/password.validator";
+import { User } from "./user";
 
 @Component({
   selector: "app-root",
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit {
     private _registrationService: RegistrationService
   ) {}
   title = "reactive-forms";
-
+  data = [];
   registrationForm: FormGroup;
   get userName() {
     return this.registrationForm.get("userName");
@@ -34,10 +35,11 @@ export class AppComponent implements OnInit {
 
   onSubmit() {
     console.log(this.registrationForm.value);
-    this._registrationService.register(this.registrationForm.value)
-    .subscribe(
-      response => console.log("Success!", response),
-      error => console.log("Error!",error)
+    this._registrationService.register(this.registrationForm.value).subscribe(
+      response => {
+        (this.data = response), console.log("Success!", response);
+      },
+      error => console.log("Error!", error)
     );
   }
 
@@ -102,4 +104,8 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
+  // userModel = new User(
+    
+  // );
 }

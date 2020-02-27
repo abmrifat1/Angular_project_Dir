@@ -15,9 +15,9 @@ app.post("/enroll", function(req, res) {
   console.log(req.body);
   res.json({
     message: "get dta okay",
-    result: req.body
+    result: req.body,
+    status: 200
   });
-  // res.status(200).send({ message: "Data received" });
 });
 
 app.listen(PORT, function() {
