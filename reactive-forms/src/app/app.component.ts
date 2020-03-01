@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   ) {}
   title = "reactive-forms";
   data = [];
+  alternativeEmails:any[]=[]
   userDate:any[] =[];
   registrationForm: FormGroup;
   get userName() {
@@ -48,7 +49,8 @@ export class AppComponent implements OnInit {
     this._registrationService.getUser().subscribe(
       result=>{
         console.log('user list:',result);
-        this.userDate=result.data;
+        this.userDate=result.data;  
+        console.log('+++%%%%',this.userDate)
       },
       err=> console.log("Error!",err)
     )

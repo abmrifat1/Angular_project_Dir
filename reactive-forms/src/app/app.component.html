@@ -139,6 +139,10 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Password</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Postal-code</th>
+                <th>Alternative Email</th>
               </tr>
             </thead>
             <tbody>
@@ -146,13 +150,21 @@
                 <td scope="row">{{ user.userName }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.password }}</td>
+                <td>{{ user.address.city }}</td>
+                <td>{{ user.address.state }}</td>
+                <td>{{ user.address.postalCode }}</td>
+                <td>
+                  {{ user.alternateEmails | json }}
+                  <!-- <div *ngFor="let email of userDate.alternateEmails">
+                    <p>{{ email }}</p>
+                  </div> -->
+                </td>
               </tr>
             </tbody>
           </table>
           <h2>{{ "" }}</h2>
         </div>
       </div>
-     
     </div>
   </div>
 </div>

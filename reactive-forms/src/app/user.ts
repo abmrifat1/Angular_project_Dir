@@ -7,14 +7,9 @@ export class User {
     public confirmPassword: string,
     public city: string,
     public state: string,
-    public postalCode: string
+    public postalCode: string,
+    public alternateEmails: [],
   ) {}
 }
 
-export interface Sample {
-  userName: string;
-  email: string;
-  subscribe: boolean;
-  password: string;
-  confirmPassword: string;
-}
+

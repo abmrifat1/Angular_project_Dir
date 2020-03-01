@@ -1,7 +1,7 @@
 import { IResponse } from './iresponse';
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { User,Sample } from "./user";
+import { User } from "./user";
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class RegistrationService {
     return this._http.post<any>(this._url, userData);
   }
 
-  getUser():Observable<IResponse<Sample[]>>{
-    return this._http.get<IResponse<Sample[]>>(this._url);
+  getUser():Observable<IResponse<User[]>>{
+    return this._http.get<IResponse<User[]>>(this._url);
   }
 }
